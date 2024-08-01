@@ -17,3 +17,16 @@ export class AuthCreateDto {
     })
     password: string;
 }
+
+export class AuthLoginDto {
+    @IsEmail()
+    email: string;
+
+    @IsString({
+        message: "Поле пароль должно быть заполено"
+    })
+    @MinLength(8, {
+        message: 'Минимальное количество символов должно быть 8'
+    })
+    password: string;
+}
