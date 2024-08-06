@@ -29,3 +29,9 @@ model UserRole {
 
   @@id([userId, roleId])
 }
+
+model ProductColor {
+  id        Int      @default(autoincrement()) @id
+  name      String @unique
+  hex       String
+}

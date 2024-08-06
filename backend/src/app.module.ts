@@ -7,12 +7,14 @@ import { RoleModule } from './role/role.module';
 import { RolesGuard } from './role/role.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
+import { ProductColorModule } from './product-color/product-color.module';
 
 @Module({
   imports: [
     AuthModule,
     UserModule,
     RoleModule,
+    ProductColorModule,
   ],
   controllers: [],
   providers: [
