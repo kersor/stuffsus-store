@@ -1,11 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { UserAddRoleDto } from './user.dto';
+import { Roles } from 'src/role/role.decorator';
 
 @Injectable()
 export class UserService { 
     constructor(private prisma: PrismaService) {}
 
+    @Roles('ADMIN')
     async foundAll () {
         const users = await this.prisma.user.findMany({
             include: {
@@ -20,6 +22,7 @@ export class UserService {
         return users
     }
 
+    @Roles('ADMIN')
     async addRoleUser (dto: UserAddRoleDto) {
 
         const user = await this.prisma.user.findFirst({
@@ -52,6 +55,7 @@ export class UserService {
         return addRoleForUser
     }
 
+    @Roles('ADMIN')
     async removeRoleUser (dto: UserAddRoleDto) {
         const checkRoleUser = await this.prisma.role.findFirst({where:{id: dto.roleId}})
         if(checkRoleUser.name === 'USER') throw new HttpException('Роль USER удалять НЕЛЬЗЯ', HttpStatus.BAD_REQUEST)
@@ -77,6 +81,7 @@ export class UserService {
         return removeRoleForUser
     }
 
+    @Roles('ADMIN')
     async foundUser (email: string) {
         return this.prisma.user.findMany({
             where:{email: email},

@@ -15,7 +15,8 @@ export class AuthService {
 
     async register (dto: AuthCreateDto) {
         const candidate = await this.userService.foundUser(dto.email)
-        if(candidate) throw new HttpException('Пользователь с таким Email, уже существует', HttpStatus.BAD_REQUEST)
+
+        if(candidate.length > 0) throw new HttpException('Пользователь с таким Email, уже существует', HttpStatus.BAD_REQUEST)
         
         let role = await this.foundRole('USER')
         if(!role) role = await this.prisma.role.create({data:{name: 'USER'}})
@@ -60,3 +61,4 @@ export class AuthService {
         }
     }
 }
+ 
