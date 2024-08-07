@@ -13,13 +13,11 @@ export class ProductColorController {
     return this.productColorService.createProductColor(dto)
   }
 
-  @Roles('ADMIN')
   @Get()
   async foundAllProductColor () {
     return this.productColorService.foundAllProductColor()
   }
 
-  @Roles('ADMIN')
   @Get(':id')
   async foundProductColor (@Param('id') id: string) {
     return this.productColorService.foundProductColor(id)

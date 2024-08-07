@@ -35,3 +35,9 @@ model ProductColor {
   name      String @unique
   hex       String
 }
+
+model ProductBrand {
+  id        Int      @default(autoincrement()) @id
+  name      String   @unique
+  photo     String
+}
